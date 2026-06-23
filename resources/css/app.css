@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Outfit', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    
+    /* Monochrome Palette Overrides */
+    --color-primary-50: #f4f4f5;
+    --color-primary-100: #e4e4e7;
+    --color-primary-200: #d4d4d8;
+    --color-primary-500: #18181b;
+    --color-primary-600: #09090b;
+    --color-primary-700: #000000;
+    
+    --color-dark-surface: #09090b;
+    --color-dark-card: #0e0e11;
+    
+    /* Animation Keyframes */
+    --animate-float-slow: float-slow 10s ease-in-out infinite;
+    --animate-depth-spin: depth-spin 15s linear infinite;
+}
+
+@keyframes float-slow {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(0.5deg); }
+}
+
+@keyframes depth-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Custom Base Configurations */
+body {
+    background-color: #fcfcfc;
+    color: #09090b;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Dark theme manual configuration */
+.dark body {
+    background-color: #000000;
+    color: #fafafa;
+}
+
+/* Structural Neo-Brutalism 3D Shadows with rounded profiles */
+.shadow-3d-light {
+    box-shadow: 4px 4px 0px 0px #000000;
+    border: 2px solid #000000;
+    border-radius: 10px;
+}
+
+.shadow-3d-dark {
+    box-shadow: 4px 4px 0px 0px #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+}
+
+.shadow-3d {
+    box-shadow: 4px 4px 0px 0px #09090b;
+    border: 2px solid #09090b;
+    border-radius: 10px;
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dark .shadow-3d {
+    box-shadow: 4px 4px 0px 0px #f4f4f5;
+    border: 2px solid #f4f4f5;
+}
+
+/* Hover Tilt & Push down 3D actions with perspective rotations */
+.tilt-3d {
+    border-radius: 10px;
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    perspective: 600px;
+}
+
+.tilt-3d:hover {
+    transform: translate(-4px, -4px) rotateX(2deg) rotateY(-2deg);
+    box-shadow: 8px 8px 0px 0px #09090b;
+}
+
+.dark .tilt-3d:hover {
+    box-shadow: 8px 8px 0px 0px #f4f4f5;
+}
+
+.tilt-3d:active {
+    transform: translate(3px, 3px);
+    box-shadow: 1px 1px 0px 0px #09090b;
+}
+
+.dark .tilt-3d:active {
+    box-shadow: 1px 1px 0px 0px #f4f4f5;
+}
+
+/* Modern Capsule/Pill 3D Buttons */
+.btn-3d-pill {
+    border-radius: 9999px !important;
+    border: 2px solid #09090b;
+    box-shadow: 3px 3px 0px 0px #09090b;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dark .btn-3d-pill {
+    border: 2px solid #f4f4f5;
+    box-shadow: 3px 3px 0px 0px #f4f4f5;
+}
+
+.btn-3d-pill:hover {
+    transform: translate(-3px, -3px) rotateX(1deg) rotateY(-1deg);
+    box-shadow: 6px 6px 0px 0px #09090b;
+}
+
+.dark .btn-3d-pill:hover {
+    box-shadow: 6px 6px 0px 0px #f4f4f5;
+}
+
+.btn-3d-pill:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px 0px #09090b;
+}
+
+.dark .btn-3d-pill:active {
+    box-shadow: 1px 1px 0px 0px #f4f4f5;
+}
+
+/* Premium 3D Perspective Card Tilt */
+.card-3d-dynamic {
+    border-radius: 12px;
+    border: 2px solid #09090b;
+    box-shadow: 4px 4px 0px 0px #09090b;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.dark .card-3d-dynamic {
+    border: 2px solid #f4f4f5;
+    box-shadow: 4px 4px 0px 0px #f4f4f5;
+}
+
+.card-3d-dynamic:hover {
+    transform: translateY(-6px) rotateX(3deg) rotateY(-3deg);
+    box-shadow: 10px 10px 0px 0px #09090b;
+}
+
+.dark .card-3d-dynamic:hover {
+    box-shadow: 10px 10px 0px 0px #f4f4f5;
+}
+
+
+/* Clean Monochrome Mesh BG */
+.bg-monochrome-mesh {
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(24, 24, 27, 0.02) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(24, 24, 27, 0.03) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(0, 0, 0, 0.01) 0px, transparent 50%);
+}
+
+.dark .bg-monochrome-mesh {
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(244, 244, 245, 0.04) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(244, 244, 245, 0.03) 0px, transparent 50%);
+}
+
+/* 3D Isometric container rotation */
+.isometric-3d {
+    transform: perspective(800px) rotateX(12deg) rotateY(-8deg) rotateZ(2deg);
+    transition: transform 0.4s ease;
+}
+
+.isometric-3d:hover {
+    transform: perspective(800px) rotateX(6deg) rotateY(-4deg) rotateZ(1deg);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #e4e4e7;
+    border-radius: 99px;
+}
+.dark ::-webkit-scrollbar-thumb {
+    background: #27272a;
+}
+
+/* Premium Repeating Grid Pattern background */
+.bg-grid-stark {
+    background-size: 28px 28px;
+    background-image: 
+        linear-gradient(to right, rgba(0,0,0,0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.035) 1px, transparent 1px);
+}
+.dark .bg-grid-stark {
+    background-image: 
+        linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+}
+
+/* Custom Stark Text Selection Colors */
+::selection {
+    background-color: #09090b;
+    color: #ffffff;
+}
+.dark ::selection {
+    background-color: #f4f4f5;
+    color: #09090b;
+}
+
+/* Cyber-Proctor Infinite Marquee Ticker */
+@keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+    display: flex;
+    width: 200%;
+    animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+    animation-play-state: paused;
+}
+
+/* AI Camera Radar Vertical Sweeper Scanline */
+@keyframes sweep {
+    0% { top: 0%; }
+    100% { top: 100%; }
+}
+
+.animate-sweep {
+    animation: sweep 3s linear infinite;
+}
+
+.animate-sweep-fast {
+    animation: sweep 1.5s linear infinite;
+}
+
+/* Cyber CRT Proctor Stream Scanline Filter */
+.crt-screen::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+    z-index: 20;
+    background-size: 100% 4px;
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+/* Color Scheme & Browser Form Controls Styling */
+html {
+    color-scheme: light;
+}
+html.dark {
+    color-scheme: dark;
+}
+
+/* Make calendar/date/time picker indicators highly visible in dark mode */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover,
+input[type="time"]::-webkit-calendar-picker-indicator:hover {
+    transform: scale(1.15);
+}
+
+.dark input[type="date"]::-webkit-calendar-picker-indicator,
+.dark input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+.dark input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(1.25);
+}
+
+
