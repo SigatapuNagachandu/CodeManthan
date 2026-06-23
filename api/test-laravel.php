@@ -16,35 +16,36 @@ try {
     }
     $app = require_once __DIR__.'/../bootstrap/app.php';
     
-    echo "<h2>Laravel Bootstrap Success!</h2>";
-    echo "Laravel Version: " . $app->version() . "<br>";
-    echo "Storage Path: " . $app->storagePath() . "<br>";
+    echo "<h2>Laravel Instance Created</h2>";
     
-    // 3. Test handle HTTP kernel request
-    echo "<h3>Testing HTTP Kernel Boot</h3>";
-    $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+    // 3. Step-by-Step Manual Boot (to catch the primary exception before the Handler runs)
+    $bootstrappers = [
+        \Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables::class,
+        \Illuminate\Foundation\Bootstrap\LoadConfiguration::class,
+        // Skipping HandleExceptions so it doesn't mask the error!
+        \Illuminate\Foundation\Bootstrap\RegisterProviders::class,
+        \Illuminate\Foundation\Bootstrap\BootProviders::class,
+    ];
     
-    echo "Kernel resolved. Capturing request...<br>";
-    $request = Illuminate\Http\Request::capture();
+    foreach ($bootstrappers as $bootstrapper) {
+        echo "Running bootstrapper: <code>" . htmlspecialchars($bootstrapper) . "</code>... ";
+        $app->make($bootstrapper)->bootstrap($app);
+        echo "<span style='color:green;'>SUCCESS</span><br>";
+    }
     
-    echo "Sending request to router...<br>";
-    $response = $kernel->handle($request);
-    
-    echo "<strong>Response status:</strong> " . $response->getStatusCode() . "<br>";
-    echo "<hr><h4>Response Content:</h4>";
-    $response->sendContent();
-    
-    $kernel->terminate($request, $response);
+    echo "<h3 style='color:green;'>All Bootstrappers completed successfully! No boot-level exceptions.</h3>";
     
 } catch (\Exception $e) {
-    echo "<h2 style='color:red;'>Laravel Exception Caught</h2>";
-    echo "<strong>Message:</strong> " . htmlspecialchars($e->getMessage()) . "<br>";
+    echo "<h2 style='color:red;'>Primary Laravel Exception Caught</h2>";
+    echo "<strong>Class:</strong> " . get_class($e) . "<br>";
+    echo "<strong>Message:</strong> <span style='color:red; font-weight:bold;'>" . htmlspecialchars($e->getMessage()) . "</span><br>";
     echo "<strong>File:</strong> " . htmlspecialchars($e->getFile()) . " (Line " . $e->getLine() . ")<br>";
     echo "<h4>Stack Trace:</h4>";
     echo "<pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
 } catch (\Throwable $t) {
-    echo "<h2 style='color:red;'>Laravel Fatal Error / Throwable Caught</h2>";
-    echo "<strong>Message:</strong> " . htmlspecialchars($t->getMessage()) . "<br>";
+    echo "<h2 style='color:red;'>Primary Laravel Fatal Error / Throwable Caught</h2>";
+    echo "<strong>Class:</strong> " . get_class($t) . "<br>";
+    echo "<strong>Message:</strong> <span style='color:red; font-weight:bold;'>" . htmlspecialchars($t->getMessage()) . "</span><br>";
     echo "<strong>File:</strong> " . htmlspecialchars($t->getFile()) . " (Line " . $t->getLine() . ")<br>";
     echo "<h4>Stack Trace:</h4>";
     echo "<pre>" . htmlspecialchars($t->getTraceAsString()) . "</pre>";
