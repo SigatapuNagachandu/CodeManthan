@@ -4,6 +4,9 @@
     "functions": {
         "api/index.php": {
             "runtime": "vercel-php@0.7.3"
+        },
+        "public/test-db.php": {
+            "runtime": "vercel-php@0.7.3"
         }
     },
     "routes": [
@@ -22,6 +25,10 @@
         {
             "src": "/robots.txt",
             "dest": "/public/robots.txt"
+        },
+        {
+            "src": "/test-db.php",
+            "dest": "/public/test-db.php"
         },
         {
             "src": "/(.*)",
