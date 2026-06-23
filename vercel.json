@@ -8,6 +8,9 @@
         },
         "api/test-db.php": {
             "runtime": "vercel-php@0.7.3"
+        },
+        "api/test-laravel.php": {
+            "runtime": "vercel-php@0.7.3"
         }
     },
     "routes": [
@@ -30,6 +33,10 @@
         {
             "src": "/test-db.php",
             "dest": "/api/test-db.php"
+        },
+        {
+            "src": "/test-laravel.php",
+            "dest": "/api/test-laravel.php"
         },
         {
             "src": "/(.*)",
